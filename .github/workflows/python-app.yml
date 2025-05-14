@@ -1,0 +1,41 @@
+name: Python CI
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            #check out the code from the repository
+            - name: Check out code
+              uses: actions/checkout@v2
+            
+            # setup python environment
+            - name: set up python
+              uses: action/setup-python@v2
+              with:
+                python-version: '3.12.0'
+            
+            #install all dependencies
+            - name: install dependencies
+              run:
+                python3 -m pip install --upgrade pip
+                python3 -m pip install -r requirements.txt
+            # Run tests
+            - name: Run tests
+              run: pytest
+              
+
+
+
+
+
+
+    
